@@ -44,31 +44,24 @@ class DiscussionBoard{
             case 1:
                // System.out.println("Post new message");
                //places the post in the next availible spot
-                    String post = scan.nextLine();
-
+               System.out.println("Please enter a name: ");
+               String name = scan.nextLine();
+               System.out.println("Please your post: ");
+               String post = scan.nextLine();
+                
+                    
                     for(int i = 0; i < BOARD_MAX; i++){
                         if(messageBoard[i].equals("")){
-                            messageBoard[i] = post; //assign post into empty arrat spot
+                            messageBoard[i] = post; //assign post into empty array spot
 
 
                             //tokenize entire post
                             StringTokenizer str = new StringTokenizer(post, " ");
                           
                                 //get the name
-                                associatedName[i] = str.nextToken();
-                                count++; //increaqse the count of posts
+                                associatedName[i] = name;
+                                count++; //increase the count of posts
 
-                                
-                                //count the vowels in the name
-                            //     for(char let:  associatedName[i].toLowerCase().toCharArray()){
-                            //         //if the vowel exists    
-                            //         if(vowels.contains(let)){
-                            //             numVowels++;
-                            //             }
-                            // }
-
-                            //count the rest of the vowels in the post
-                            str.nextToken(); //get rid of says
                             while (str.hasMoreTokens()) { 
 
                               for(char let: str.nextToken().toLowerCase().toCharArray()){
@@ -80,14 +73,21 @@ class DiscussionBoard{
                             }
                             break;
                         }
+
+                        else if(i ==9){
+                            System.out.println("No more room (womp womp)");
+                        }
                     }
+
+                    
+
 
                 break;
             case 2:
                 //System.out.println("Print all post");
                 for(int i = 0; i < BOARD_MAX; i++){
                     if(!messageBoard[i].equals("")){
-                        System.out.println(messageBoard[i]);
+                        System.out.println(associatedName[i] + " says: " + messageBoard[i]);
                     }
                 }
                 break;
@@ -95,18 +95,20 @@ class DiscussionBoard{
                 //System.out.println("Print all of posts in reverse");
                 for(int i = BOARD_MAX-1; i >= 0; i--){
                     if(!messageBoard[i].equals("")){
-                        System.out.println(messageBoard[i]);
+                        System.out.println(associatedName[i] + " says: " + messageBoard[i]);
                     }
                 }
                 break;
             case 4:
            // System.out.println("Print number of posts entered so far ");
-                System.out.println(count); //from above
+                System.out.println("number of posts: " + count); //from above
          
             break;
             
             case 5:
                 //System.out.println("Print all posts from a user");
+
+                System.out.println("Provide a search name: ");
                 String toSearch = scan.nextLine();
                 int numberOfPosts = 0;
 
@@ -141,7 +143,7 @@ class DiscussionBoard{
                     while(temp.hasMoreTokens()){
                         String curWord = temp.nextToken();
                         if(curWord.contains(word)){
-                            System.out.println(message); 
+                            System.out.println(associatedName[i] + " says: "+ message); 
                         
                             break; //goes onto the next posts
                         } 
@@ -166,7 +168,7 @@ class DiscussionBoard{
                 while(temp.hasMoreTokens()){
                     String curWord = temp.nextToken();
                     if(curWord.toLowerCase().contains(word2.toLowerCase())){
-                        System.out.println(message); 
+                        System.out.println(associatedName[i] + " says: "+ message); 
                   
                         break; //goes onto the next posts
                     } 
